@@ -3,7 +3,6 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="js/script.js"></script>
 	<title>온라인 프로필</title>
 	<meta charset="utf-8">
   <style>
@@ -12,6 +11,9 @@
         margin: 0;
             padding: 0;
             position: relative; 
+    }
+    h2 {
+        text-align: center;
     }
     #container {
         width: 1200px;
@@ -64,7 +66,7 @@
         margin-top: 120px;
     }
     section {
-        margin-left:50px;
+        margin: 5% auto;
     }
     hr {
         background: rgb(104, 173, 170);
@@ -91,7 +93,7 @@
         height: 50px;
         border: 0;
         border-radius: 10px;
-        background-color: rgb(168, 226, 207);
+        background-color: #a8e2cf;
         padding-top: 5px;
     }
     a{
@@ -99,6 +101,70 @@
         font-size: 20px;
         color: black;
     }
+
+    nav {
+        display: block;
+        position: relative;
+        width: 100%;
+        background-color: transparent;
+    }
+
+    nav .inner {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    nav .inner:hover .marker {
+            opacity: 1;
+    }
+
+    nav .marker {
+        position: absolute;
+        bottom: 0;
+        width: 90px;
+        height: 3px;
+        background-color: #a8e2cf;
+        z-index: 1;
+        opacity: 1; /* 마커를 항상 보이게 합니다 */
+        transform: translateX(0); 
+        transition: transform 0.3s ease; 
+    }
+
+    .menu {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        list-style: none;
+        padding: 0;
+    }
+
+    .menu li {
+        flex: 1;
+        position: relative;
+    }
+
+    .menu li a {
+        display: block;
+        padding: 15px 0 18px;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .menu li:hover a,
+    .menu li.active a {
+        color: #a8e2cf;
+    }
+
+    .menu li.active .marker {
+        opacity: 1;
+    }
+   
   </style>
 </head>
 
@@ -112,14 +178,14 @@
                     <img src="media/포챠코.jpg" style="width: 180px; height: 180px; border-radius: 10%; 
                                             box-shadow: 1px 1px 20px rgb(168, 226, 207); border: 3px solid rgb(178, 236, 217);" alt="">
                     <h1>윤수빈</h1>
-                    <p>프로그래밍 재밌다</p>
+                    <p>AI활용 풀스택부트캠프<br>(자바,파이썬,플러터)</p>
                 </div>
                 <div id="detail">
                     <p>Incheon, Korea</p>
                     <p>been4022@naver.com</p>
                 </div>
                 <div id="sns">
-                    <h2>SNS</h2>
+                    <h3>SNS</h3>
                     <div style="float: left; margin-right: 5px;"><button><a href="https://www.instagram.com/?hl=ko" target="_blank"><img src="media/인스타.png" style="width: 33px;"></a></button></div>
                     <div style="float: left;"><button><a href="https://ko-kr.facebook.com/login.php/?login_attempt=1&display=popup" target="_blank"><img src="media/페이스북.png" style="width: 40px;"></a></button></div>
                 </div>
@@ -144,26 +210,26 @@
 
                 <!-- 기본정보 섹션 -->
                 <section v-if="currentSection === 'intro'">
-                    <h2 class="subtitle">자기소개</h2><hr>
-                    <p style="margin-bottom: 46px; margin-left: 12px;"><mark>프로그래밍</mark>에 관심이 많습니다. <br>현재 열심히 공부하며 코딩 중!</p>
+                    <h2 class="subtitle" id="tt">자기소개</h2>
+                    <p style="margin-bottom: 46px; margin-left: 12px;"><mark>수정중</mark></p>
                 </section>
 
                 <!-- 경력 섹션 -->
                 <section v-if="currentSection === 'experience'" style="margin-bottom: 46px;">
-                    <h2 class="subtitle">Experience</h2><hr>
+                    <h2 class="subtitle" id="tt">Experience</h2>
                     <ul>
                         <li>프론트엔드
                             <ul>
                                 <li>HTML/CSS/JAVASCRIPT</li>
-                                <li>웹 페이지 잘 만든다</li>
-                                <li>다 잘함</li>
+                                <li>웹 페이지: 뮤지컬 예매 사이트</li>
+                                <li>git: https://github.com/chachaziyo/musicAll</li>
                             </ul>
                         </li>
                         <br>
                         <li>백엔드
                             <ul>
-                                <li>자바 잘함</li>
-                                <li>오라클 더 잘함</li>
+                                <li>DB 설계(ERP)</li>
+                                <li>JAVA</li>
                             </ul>
                         </li>
                     </ul>
@@ -171,18 +237,21 @@
 
                 <!-- 보유 기술 섹션 -->
                 <section v-if="currentSection === 'skills'" style="margin-bottom: 46px;">
-                    <h2 class="subtitle">보유 기술</h2><hr>
+                    <h2 class="subtitle" id="tt">보유 기술</h2>
                     <li style="list-style: none;">
                         <ul>
                             <li>자바</li>
                             <li>오라클</li>
+                            <li>C</li>
+                            <li>리눅스</li>
+                            <li>GIT</li>
                         </ul>
                     </li>
                 </section>
 
                 <!-- 학력 섹션 -->
                 <section v-if="currentSection === 'education'">
-                    <h2 class="subtitle">Education</h2><hr>
+                    <h2 class="subtitle" id="tt">Education</h2>
                     <table>
                         <caption style="margin-bottom: 5px;">학력 사항</caption>
                         <thead>
@@ -212,7 +281,7 @@
 
                 <!-- 취미 섹션 -->
                 <section v-if="currentSection === 'hobbies'">
-                    <h2 class="subtitle">취미</h2><hr>
+                    <h2 class="subtitle" id="tt">취미</h2>
                     <p>여가 시간에는 독서, 음악 감상, 그리고 여행을 즐깁니다.</p>
                 </section>
             </div>
@@ -220,16 +289,136 @@
     </div>
 </body>
 
+
 </html>
 
 <script src="js/script.js"></script>
+<!-- <script>
+    $(document).ready(function() {
+        $('.menu li').on('mouseenter', function () {
+            // 각 메뉴 li의 left 위치와 너비를 가져옵니다.
+            const $menuItem = $(this);
+            const itemLeft = $menuItem.position().left;
+            const itemWidth = $menuItem.outerWidth();
+            
+            // 마커의 위치값을 계산합니다.
+            const centerValue = itemLeft + itemWidth / 2;
+            
+            // 마커를 움직여 메뉴 li의 가운데로 위치시킵니다.
+            $('.marker').css('--marker-translate', centerValue + 'px');
+        });
+    });
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                currentSection: 'intro'
+            };
+        },
+        methods: {
+            showSection(section) {
+                this.currentSection = section;
+                this.$nextTick(() => {
+                    const activeItem = document.querySelector('.menu li.active');
+                    if (activeItem) {
+                        const itemLeft = activeItem.getBoundingClientRect().left + window.scrollX;
+                        const itemWidth = activeItem.offsetWidth;
+                        const centerValue = itemLeft + itemWidth / 2;
+                        document.querySelector('.marker').style.setProperty('--marker-translate', `${centerValue}px`);
+                    }
+                });
+            }
+        }
+    });
+
+    const mountedApp = document.getElementById('app').__vue_app__;
+    if (mountedApp) {
+        mountedApp.unmount();
+    }
+
+    app.mount('#app');
+</script>
+
 <script>
-    setInterval(()=> {
+    setInterval(() => {
+        let datetime = new Date();
+        let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
+        let obj = document.querySelector("#time");
+        obj.innerHTML = time;
+    });
+</script> -->
+
+<script>
+    setInterval(() => {
         let datetime = new Date();
         let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
         let obj = document.querySelector("#time");
         obj.innerHTML = time;
     });
 
+    $(document).ready(function() {
+        // 마커 위치 업데이트 함수
+        function updateMarkerPosition($menuItem) {
+            const itemLeft = $menuItem.position().left;
+            const itemWidth = $menuItem.outerWidth();
+            const centerValue = itemLeft + itemWidth / 2 - 45;  // 45는 마커 너비의 절반입니다.
+            $('.marker').css('transform', `translateX(${centerValue}px)`);
+        }
 
-</script>
+        $('.menu li').on('mouseenter', function () {
+            updateMarkerPosition($(this));
+        });
+
+        const app = Vue.createApp({
+            data() {
+                return {
+                    currentSection: 'intro'
+                };
+            },
+            methods: {
+                showSection(section) {
+                    this.currentSection = section;
+                    this.$nextTick(() => {
+                        const activeItem = document.querySelectorAll('.menu li').forEach((item) => {
+                            if (item.innerText.trim() === sectionToText(section)) {
+                                item.classList.add('active');
+                                updateMarkerPosition($(item));
+                            } else {
+                                item.classList.remove('active');
+                            }
+                        });
+                    });
+                }
+            },
+            mounted() {
+                const activeItem = $('.menu li.active');
+                if (activeItem.length) {
+                    updateMarkerPosition(activeItem);
+                }
+            }
+        });
+
+        function sectionToText(section) {
+            switch (section) {
+                case 'intro': return '기본정보';
+                case 'experience': return '경력';
+                case 'skills': return '보유 기술';
+                case 'education': return '학력';
+                case 'hobbies': return '취미';
+                default: return '';
+            }
+        }
+
+        const mountedApp = document.getElementById('app').__vue_app__;
+        if (mountedApp) {
+            mountedApp.unmount();
+        }
+
+        app.mount('#app');
+    });
+    </script>
+
+
+
+
+
