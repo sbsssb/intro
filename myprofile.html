@@ -296,61 +296,6 @@
 </html>
 
 <script src="js/script.js"></script>
-<!-- <script>
-    $(document).ready(function() {
-        $('.menu li').on('mouseenter', function () {
-            // 각 메뉴 li의 left 위치와 너비를 가져옵니다.
-            const $menuItem = $(this);
-            const itemLeft = $menuItem.position().left;
-            const itemWidth = $menuItem.outerWidth();
-            
-            // 마커의 위치값을 계산합니다.
-            const centerValue = itemLeft + itemWidth / 2;
-            
-            // 마커를 움직여 메뉴 li의 가운데로 위치시킵니다.
-            $('.marker').css('--marker-translate', centerValue + 'px');
-        });
-    });
-
-    const app = Vue.createApp({
-        data() {
-            return {
-                currentSection: 'intro'
-            };
-        },
-        methods: {
-            showSection(section) {
-                this.currentSection = section;
-                this.$nextTick(() => {
-                    const activeItem = document.querySelector('.menu li.active');
-                    if (activeItem) {
-                        const itemLeft = activeItem.getBoundingClientRect().left + window.scrollX;
-                        const itemWidth = activeItem.offsetWidth;
-                        const centerValue = itemLeft + itemWidth / 2;
-                        document.querySelector('.marker').style.setProperty('--marker-translate', `${centerValue}px`);
-                    }
-                });
-            }
-        }
-    });
-
-    const mountedApp = document.getElementById('app').__vue_app__;
-    if (mountedApp) {
-        mountedApp.unmount();
-    }
-
-    app.mount('#app');
-</script>
-
-<script>
-    setInterval(() => {
-        let datetime = new Date();
-        let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
-        let obj = document.querySelector("#time");
-        obj.innerHTML = time;
-    });
-</script> -->
-
 <script>
     setInterval(() => {
         let datetime = new Date();
@@ -419,7 +364,7 @@
 
         app.mount('#app');
     });
-    </script>
+</script>
 
 
 
