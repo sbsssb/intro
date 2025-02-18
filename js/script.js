@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resizeCanvas(); // 초기 크기 설정
     window.addEventListener('resize', resizeCanvas); // 창 크기 변경 시 캔버스 크기 조정
 
-    const images = ["../media/leaf.png", "../media/leaf.png", "../media/leaf.png"]; // 이미지 파일 경로를 배열에 추가하세요
+    const images = ["media/leaf.png", "media/leaf.png", "media/leaf.png"]; // 이미지 파일 경로를 배열에 추가하세요
     const particles = [];
 
     class Particle {
