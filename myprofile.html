@@ -3,16 +3,20 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 	<title>온라인 프로필</title>
 	<meta charset="utf-8">
   <style>
     body {
-        background-image: url("media/배경4.jpg");
+        background-image: url("media/배경3.jpg");
         margin: 0;
-            padding: 0;
-            position: relative; 
-        background-repeat: no-repeat;
-        background-size: cover;
+        padding: 0;
+        position: relative; 
+        /* background-repeat: no-repeat; */
+        /* background-size: cover; */
+        background-position: center;
+        width: 100%;
+        height: 100%;
     }
     h2 {
         text-align: center;
@@ -66,10 +70,12 @@
         margin-left: 100px;
         margin-top: 40px;
     }
-    #timetable {
-        margin-left: 100px;
+    .audio {
+        margin-left: 40px;
         margin-top: 120px;
+        
     }
+
     section {
         margin: 5% auto;
     }
@@ -169,6 +175,7 @@
     .menu li.active .marker {
         opacity: 1;
     }
+
    
   </style>
 </head>
@@ -186,18 +193,27 @@
                     <p>AI활용 풀스택부트캠프<br>(자바,파이썬,플러터)</p>
                 </div>
                 <div id="detail">
-                    <p>Incheon, Korea</p>
-                    <p>been4022@naver.com</p>
+                    <p>Bucheon, Korea</p>
+                    <p>been4022@gmail.com</p>
                 </div>
                 <div id="sns">
                     <h3>SNS</h3>
                     <div style="float: left; margin-right: 5px;"><button><a href="https://www.instagram.com/?hl=ko" target="_blank"><img src="media/인스타.png" style="width: 33px;"></a></button></div>
                     <div style="float: left;"><button><a href="https://ko-kr.facebook.com/login.php/?login_attempt=1&display=popup" target="_blank"><img src="media/페이스북.png" style="width: 40px;"></a></button></div>
                 </div>
-                <div id="timetable">
-                    <h3>접속 시각</h3>
-                    <div id="time"></div>
+               
+                <div class="audio">
+                    <audio id="background-music" controls loop>
+                        <source src="media/솔루션스NA.mp3" type="audio/mp3">
+                    </audio>
+                    <p style="color: rgb(95, 95, 95); font-size: 15px; margin-top: 5px; margin-left: 60px;">
+                        <img src="media/music.png" alt="Music Icon Left" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
+                        솔루션스 - N/A
+                        <img src="media/music.png" alt="Music Icon Right" style="width: 20px; height: 20px; vertical-align: middle; margin-left: 5px;">
+                    </p>
+                    
                 </div>
+                
             </div>
             <div id="contents">
                 <nav>
@@ -207,7 +223,7 @@
                             <li :class="{ active: currentSection === 'experience' }"><a href='#' @click.prevent="showSection('experience')">경력</a></li>
                             <li :class="{ active: currentSection === 'skills' }"><a href='#' @click.prevent="showSection('skills')">보유 기술</a></li>
                             <li :class="{ active: currentSection === 'education' }"><a href='#' @click.prevent="showSection('education')">학력</a></li>
-                            <li :class="{ active: currentSection === 'hobbies' }"><a href='#' @click.prevent="showSection('hobbies')">취미</a></li>
+                            <li :class="{ active: currentSection === 'hobbies' }"><a href='#' @click.prevent="showSection('hobbies')">방명록</a></li>
                         </ul>
                         <span class='marker'></span>
                     </div>
@@ -216,8 +232,29 @@
                 <!-- 기본정보 섹션 -->
                 <section v-if="currentSection === 'intro'">
                     <h2 class="subtitle" id="tt">자기소개</h2>
-                    <p style="margin-bottom: 46px; margin-left: 12px;"><mark>수정중</mark></p>
+                    <ul>
+                        <li>나이
+                            <ul>
+                                <li>99년생</li>
+                            </ul>
+                        </li>
+                        <br>
+                        <li>취미
+                            <ul>
+                                <li>페스티벌 다니기</li>
+                                <li>게임</li>
+                                <li>산책</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <img src="media/로아.jpg" style="width: 30%;">
+                        <img src="media/페스티벌.jpg" style="width: 50%;">
+                    </div>
                 </section>
+                
+                
+                
 
                 <!-- 경력 섹션 -->
                 <section v-if="currentSection === 'experience'" style="margin-bottom: 46px;">
@@ -284,11 +321,39 @@
                     </table>
                 </section>
 
-                <!-- 취미 섹션 -->
+                <!-- 방명록 섹션 -->
                 <section v-if="currentSection === 'hobbies'">
-                    <h2 class="subtitle" id="tt">취미</h2>
-                    <p>여가 시간에는 독서, 음악 감상, 그리고 여행을 즐깁니다.</p>
+                    <h2 class="subtitle" id="tt">방명록</h2>
+                
+                    <!-- 방명록 입력 폼 -->
+                    <div id="guestbook-form" style="margin-top: 20px;">
+                        <div style="margin-bottom: 10px;">
+                            <label for="guestbook-name">이름:</label>
+                            <input type="text" id="guestbook-name" v-model="guestbookName" placeholder="이름을 입력하세요"
+                                    style="border: none; margin-left: 10px;">
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <label for="guestbook-message">메시지:</label>
+                            <textarea id="guestbook-message" v-model="guestbookMessage" placeholder="메시지를 남겨 주세요" 
+                                style="width: 100%; height: 100px; border: none;"></textarea>
+                        </div>
+                        
+                        <button @click="addGuestbookEntry" style="width: 50px; height: 32px; text-align: center;">제출</button>
+                    </div>
+                
+                    <!-- 방명록 목록 -->
+                    <div id="guestbook-entries" style="margin-top: 20px;">
+                        <h3>남긴 말</h3>
+                        <ul>
+                            <li v-for="entry in guestbookEntries" :key="entry.id">
+                                <strong>{{ entry.name }}</strong>: {{ entry.message }}
+                            </li>
+                        </ul>
+                    </div>
                 </section>
+                
+                
             </div>
         </div>
     </div>
@@ -298,20 +363,129 @@
 </html>
 
 <script src="js/script.js"></script>
+<!-- <script>
+// 쿠키 관련 함수
+function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {
+        document.cookie = name + '=; Max-Age=-99999999;';
+    }
+    
+
+        $(document).ready(function() {
+            // 마커 위치 업데이트 함수
+            function updateMarkerPosition($menuItem) {
+                const itemLeft = $menuItem.position().left;
+                const itemWidth = $menuItem.outerWidth();
+                const centerValue = itemLeft + itemWidth / 2 - 45; // 45는 마커 너비의 절반입니다.
+                $('.marker').css('transform', `translateX(${centerValue}px)`);
+            }
+
+            $('.menu li').on('mouseenter', function () {
+                updateMarkerPosition($(this));
+            });
+
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        currentSection: 'intro'
+                    };
+                },
+                methods: {
+                    showSection(section) {
+                        this.currentSection = section;
+                        this.$nextTick(() => {
+                            const activeItem = document.querySelectorAll('.menu li').forEach((item) => {
+                                if (item.innerText.trim() === sectionToText(section)) {
+                                    item.classList.add('active');
+                                    updateMarkerPosition($(item));
+                                } else {
+                                    item.classList.remove('active');
+                                }
+                            });
+                        });
+                    }
+                },
+                mounted() {
+                    const activeItem = $('.menu li.active');
+                    if (activeItem.length) {
+                        updateMarkerPosition(activeItem);
+                    }
+                }
+            });
+
+            function sectionToText(section) {
+                switch (section) {
+                    case 'intro': return '기본정보';
+                    case 'experience': return '경력';
+                    case 'skills': return '보유 기술';
+                    case 'education': return '학력';
+                    case 'hobbies': return '취미';
+                    default: return '';
+                }
+            }
+
+            const mountedApp = document.getElementById('app').__vue_app__;
+            if (mountedApp) {
+                mountedApp.unmount();
+            }
+
+            app.mount('#app');
+        });
+</script> -->
+
 <script>
-    setInterval(() => {
-        let datetime = new Date();
-        let time = datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds();
-        let obj = document.querySelector("#time");
-        obj.innerHTML = time;
-    });
+    // 쿠키 관련 함수
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {
+        document.cookie = name + '=; Max-Age=-99999999;';
+    }
 
     $(document).ready(function() {
         // 마커 위치 업데이트 함수
         function updateMarkerPosition($menuItem) {
             const itemLeft = $menuItem.position().left;
             const itemWidth = $menuItem.outerWidth();
-            const centerValue = itemLeft + itemWidth / 2 - 45;  // 45는 마커 너비의 절반입니다.
+            const centerValue = itemLeft + itemWidth / 2 - 45; // 45는 마커 너비의 절반입니다.
             $('.marker').css('transform', `translateX(${centerValue}px)`);
         }
 
@@ -319,17 +493,22 @@
             updateMarkerPosition($(this));
         });
 
-        const app = Vue.createApp({
+        const { createApp } = Vue;
+
+        const app = createApp({
             data() {
                 return {
-                    currentSection: 'intro'
+                    currentSection: 'intro',
+                    guestbookName: '',
+                    guestbookMessage: '',
+                    guestbookEntries: []
                 };
             },
             methods: {
                 showSection(section) {
                     this.currentSection = section;
                     this.$nextTick(() => {
-                        const activeItem = document.querySelectorAll('.menu li').forEach((item) => {
+                        document.querySelectorAll('.menu li').forEach((item) => {
                             if (item.innerText.trim() === sectionToText(section)) {
                                 item.classList.add('active');
                                 updateMarkerPosition($(item));
@@ -338,6 +517,27 @@
                             }
                         });
                     });
+                },
+                addGuestbookEntry() {
+                    if (this.guestbookName && this.guestbookMessage) {
+                        this.guestbookEntries.push({
+                            id: this.guestbookEntries.length + 1,
+                            name: this.guestbookName,
+                            message: this.guestbookMessage
+                        });
+                        this.guestbookName = '';
+                        this.guestbookMessage = '';
+                        this.saveEntriesToCookies();
+                    }
+                },
+                saveEntriesToCookies() {
+                    setCookie('guestbookEntries', JSON.stringify(this.guestbookEntries), 7); // 7일 동안 쿠키 저장
+                },
+                loadEntriesFromCookies() {
+                    const savedEntries = getCookie('guestbookEntries');
+                    if (savedEntries) {
+                        this.guestbookEntries = JSON.parse(savedEntries);
+                    }
                 }
             },
             mounted() {
@@ -345,6 +545,7 @@
                 if (activeItem.length) {
                     updateMarkerPosition(activeItem);
                 }
+                this.loadEntriesFromCookies();
             }
         });
 
@@ -354,7 +555,7 @@
                 case 'experience': return '경력';
                 case 'skills': return '보유 기술';
                 case 'education': return '학력';
-                case 'hobbies': return '취미';
+                case 'hobbies': return '방명록';
                 default: return '';
             }
         }
@@ -367,6 +568,7 @@
         app.mount('#app');
     });
 </script>
+
 
 
 
